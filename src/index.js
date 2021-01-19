@@ -8,7 +8,9 @@ const app = express();
 app.use(express.json());
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send(
+    '<!DOCTYPE html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Document</title></head><body><ul><li><a href="/users">/users</a></li><li><a href="/user/1">/user/:id</a></li><li><a href="/posts">/posts</a></li><li><a href="/post/1">/post/:id</a></li></ul></body></html>'
+  );
 });
 
 // USER
