@@ -61,7 +61,7 @@ app.post("/post", async (req, res, next) => {
       title,
       content,
       published: false,
-      author: { connect: { email: authorEmail } },
+      author: { connect: { id: authorId } },
     },
   });
   res.json(newPost);
