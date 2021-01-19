@@ -44,7 +44,7 @@ app.get("/posts/", async (req, res, next) => {
   return res.json(posts);
 });
 
-app.get("/post/:id", async (req, res) => {
+app.get("/post/:id", async (req, res, next) => {
   const { id } = req.params;
   const post = await prisma.post.findUnique({
     where: {
@@ -52,6 +52,19 @@ app.get("/post/:id", async (req, res) => {
     },
   });
   res.json(post);
+});
+
+app.post("/post/:id", async (req, res, next) => {
+  const { title, content, authorEmail } = req.body;
+  const newPost = await prisma.post.create({
+    data: {
+      title,
+      content,
+      published: false,
+      author: { connect: { email: authorEmail } },
+    },
+  });
+  res.json(newPost);
 });
 
 const PORT = process.env.PORT || 3000; // for heroku
