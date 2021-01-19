@@ -5,7 +5,6 @@ const { PrismaClient } = pkgPrisma;
 const prisma = new PrismaClient();
 
 const app = express();
-
 app.use(express.json());
 
 app.get("/", (req, res) => {
@@ -54,4 +53,6 @@ app.get("/post/:id", async (req, res) => {
   res.json(post);
 });
 
-app.listen(3000);
+const PORT = process.env.PORT || 3000; // for heroku
+
+app.listen(PORT);
