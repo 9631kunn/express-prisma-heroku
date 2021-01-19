@@ -8,14 +8,24 @@ const app = express();
 
 app.use(express.json());
 
-app.get("/", async (req, res, next) => {
+app.get("/users", async (req, res, next) => {
   const users = await prisma.user.findMany();
-  return res.send(users);
+  return res.json(users);
+});
+
+app.get("/user/:id", async (req, res, next) => {
+  const id = req.params.id;
+  const user = await prisma.user.findUnique({
+    where: {
+      id: Number(id),
+    },
+  });
+  res.json(user);
 });
 
 app.get("/posts/", async (req, res, next) => {
   const posts = await prisma.post.findMany();
-  return res.send(posts);
+  return res.json(posts);
 });
 
 app.get("/post/:id", async (req, res) => {
