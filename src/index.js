@@ -55,7 +55,7 @@ app.get("/post/:id", async (req, res, next) => {
 });
 
 app.post("/post", async (req, res, next) => {
-  const { title, content, authorEmail } = req.body;
+  const { title, content, authorId } = req.body;
   const newPost = await prisma.post.create({
     data: {
       title,
